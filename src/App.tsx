@@ -1,20 +1,42 @@
-import LoadingOrError from 'components/LoadingOrError'
-import type { ReactElement } from 'react'
-import { lazy, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import AuthLayout from 'components/Layout/AuthLayout'
+import LoginPage from 'pages/Login'
+import { lazy } from 'react'
+import { createBrowserRouter, defer } from 'react-router-dom'
+
+// import getUserDataError from 'api/getUserDataError.mock'
+import getUserData from 'api/getUserData.mock'
+import ProtectedLayout from 'components/Layout/ProtectedLayout'
 
 const Gallery = lazy(async () => import('pages/Gallery'))
 const Details = lazy(async () => import('pages/Details'))
 
-export default function App(): ReactElement {
-	return (
-		<BrowserRouter>
-			<Suspense fallback={<LoadingOrError />}>
-				<Routes>
-					<Route path='/' element={<Gallery />} />
-					<Route path=':fruitName' element={<Details />} />
-				</Routes>
-			</Suspense>
-		</BrowserRouter>
-	)
-}
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const loader = () => defer({ userPromise: getUserData() })
+
+const router = createBrowserRouter([
+	{
+		element: <AuthLayout />,
+		loader,
+		children: [
+			{
+				path: '/',
+				element: <Gallery />
+			},
+			{
+				path: '/login',
+				element: <LoginPage />
+			},
+			{
+				element: <ProtectedLayout />,
+				children: [
+					{
+						path: '/:fruitName',
+						element: <Details />
+					}
+				]
+			}
+		]
+	}
+])
+
+export default router
