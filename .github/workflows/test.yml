@@ -29,8 +29,3 @@ jobs:
         run: pnpm run-p lint
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
-        with:
-          fail_ci_if_error: true
