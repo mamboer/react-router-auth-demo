@@ -39,7 +39,7 @@ export default function Fruit({ fruit, index }: Properties): ReactElement {
 	return (
 		<div
 			data-testid='FruitCard'
-			className='cursor-pointer select-none overflow-hidden rounded-lg shadow-lg focus:border-gray-300 focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50 dark:shadow-2xl'
+			className='cursor-pointer select-none overflow-hidden rounded-lg shadow-lg focus:border-gray-300 dark:shadow-2xl focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50'
 			role='button'
 			tabIndex={0}
 			onClick={onClick}

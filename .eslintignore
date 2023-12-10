@@ -1,1 +1,11 @@
 uno.config.ts
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.eslintcache
+coverage
+.nyc_output
+.stylelintcache
+cypress/videos
