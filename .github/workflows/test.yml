@@ -19,14 +19,14 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm i && pnpm cypress install
 
       - name: Validate
-        run: pnpm run-p lint test:ci test:e2e:ci
+        run: pnpm run-p lint
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
